@@ -26,7 +26,7 @@ sample= pd.Series(sample)
 
 Y_test = test[2]
 
-f = open("glove.6B.50d.txt",encoding='ascii')
+f = open("glove.6B.50d.txt",encoding='utf-8')
 
 embeddings_index = {} # dict of 6B words
 
