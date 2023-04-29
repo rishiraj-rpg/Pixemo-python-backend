@@ -1,2 +1,2 @@
-glove.6B.50d.txt filter=lfs diff=lfs merge=lfs -text git-lfs-attribute=compression=none
+glove.6B.50d.txt filter=lfs diff=lfs merge=lfs -text git-lfs-attribute=delta=none
 
