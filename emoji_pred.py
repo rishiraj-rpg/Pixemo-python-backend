@@ -1,4 +1,5 @@
 import emoji
+from zipfile import ZipFile
 
 emoji_dictionary = {
     "0" : "\u2764\uFE0F",
@@ -26,16 +27,32 @@ sample= pd.Series(sample)
 
 Y_test = test[2]
 
-f = open("glove.6B.50d.txt",encoding='utf-8')
+  
+# specifying the zip file name
+file_name = "glove.6B.50d.zip"
+  
+# opening the zip file in READ mode
+with ZipFile(file_name, 'r') as zip:
+    data = zip.read("glove.6B.50d.txt").split(b"\n")
+    data = [line.decode("utf-8") for line in data]
 
-embeddings_index = {} # dict of 6B words
+# f = open("glove.6B.50d.txt",encoding='utf-8')
 
-for line in f:
-  values = line.split()
-  word = values[0]
-  coefs = np.asarray(values[1:],dtype='float')
-  embeddings_index[word] = coefs
-f.close()
+embeddings_index = {}   # dict of 6B words
+
+# for line in f:
+#   values = line.split()
+#   word = values[0]
+#   coefs = np.asarray(values[1:],dtype='float')
+#   embeddings_index[word] = coefs
+# f.close()
+
+for line in data:
+    values = line.split()
+    if(len(values) != 0):
+      word = values[0]
+      coefs = np.asarray(values[1:],dtype='float')
+      embeddings_index[word] = coefs
 
 emb_dim = embeddings_index['eat'].shape[0]
 
